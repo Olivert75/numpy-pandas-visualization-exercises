@@ -1,4 +1,5 @@
 #Use pandas to create a Series named fruits from the following list:
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -40,6 +41,8 @@ fruits.value_counts().nlargest(n = 1, keep = 'all')
 fruits.value_counts().nsmallest(n = 1, keep = 'all')
 fruits.value_counts().idxmin()
 
+
+
 #Explore more attributes and methods while you continue to work with the fruits Series.
 
 #Capitalize all the string values in fruits.
@@ -51,7 +54,9 @@ sum(fruits.str.count('[a]'))
 
 #Output the number of vowels in each and every string value.
 fruits.str.count('aeiou')
-fruits['Vowels'] = sum(fruits.str.count('[a-e]'))
+sum(fruits.str.count('[aeiou]'))
+#This is for testing
+sum(fruits.str.count('[a-z]'))
 
 #Write the code to get the longest string value from fruits.
 max(fruits, key=len)
@@ -72,3 +77,73 @@ fruits[fruits.str.contains('apple')]
 
 #Which string value contains the most vowels?
 fruits[fruits.str.count('[aeiou]').max()]
+
+
+words = 'hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwzpwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawytlsiyecuproguy'
+letters = pd.Series(list(words))
+
+#Which letter occurs the most frequently in the letters Series?
+letters.value_counts() #give me the count of each letter
+letters.value_counts().nlargest(n=1, keep='all')
+
+#Which letter occurs the Least frequently?
+letters.value_counts().nsmallest(n=1, keep='all')
+
+#How many vowels are in the Series?
+sum(letters.str.count('[aeiou]'))
+#or give it a variable name and then call the variable
+vowel_counts = letters.str.count('[aeiou]').sum()
+vowel_counts
+
+#How many consonants are in the Series?
+sum(letters.str.count('[a-z]')) - sum(letters.str.count('[aeiou]'))
+
+#Create a Series that has all of the same letters but uppercased.
+letters.str.upper()
+
+#Create a bar plot of the frequencies of the 6 most commonly occuring letters.
+letters.value_counts().head(6).plot.bar(title = "Commonly occuring letters", edgecolor = 'black', color = 'red', width = .8)\
+.set(xlabel='Letter', ylabel='Frequency')
+
+#Use pandas to create a Series named numbers from the following list:
+
+numbers = pd.Series(['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23'])
+
+#What is the data type of the numbers Series?
+numbers.dtype
+
+#How many elements are in the number Series?
+numbers.size
+
+#Perform the necessary manipulations by accessing Series attributes and methods to convert the numbers Series to a numeric data type.
+convert_num = numbers.str.replace('$', '').str.replace(',','').astype('float')
+convert_num
+#Run the code to discover the maximum value from the Series.
+convert_num.max()
+#Run the code to discover the minimum value from the Series.
+convert_num.min()
+#What is the range of the values in the Series?
+convert_num.max() - convert_num.min()
+#Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
+pd.cut(convert_num, 4).value_counts()
+#Plot the binned data in a meaningful way. Be sure to include a title and axis labels.
+
+
+
+#Use pandas to create a Series named exam_scores from the following list:
+num = pd.Series([60, 86, 75, 62, 93, 71, 60, 83, 95, 78, 65, 72, 69, 81, 96, 80, 85, 92, 82, 78])
+#How many elements are in the exam_scores Series?
+num.size
+#Run the code to discover the minimum, the maximum, the mean, and the median scores for the exam_scores Series.
+num.max()
+num.min()
+num.mean()
+num.median() #or np.median(num)
+
+#Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
+
+#Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. Add the necessary points to the highest grade to make it 100, and add the same number of points to every other score in the Series as well.
+
+#Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
+
+#Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
