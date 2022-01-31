@@ -170,7 +170,7 @@ letter_grades.value_counts()
 
 #Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
 letter_grades.value_counts().sort_index().plot(kind = 'bar', color ='blue', grid = True, title = 'Numbers of letter grade')
-plt.title = ('Letter Grade')
+#plt.title = ('Letter Grade')
 #plt.grid(True, ls='-')
 plt.xticks(rotation = 45)
 plt.yticks(rotation = 45)
